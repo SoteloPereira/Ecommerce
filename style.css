@@ -1,0 +1,520 @@
+/*CSS lee de manera secuencial los estilos, si hay 2 elementos iguales con las distintas propiedades definidas
+tomara el valor del ultimo. Por otra parte se considera y prevalece el que tenga mayor especificidad*/
+
+/*Existen diferentes formas de escribir CSS. Modulos, BEM , utilidades, SMACCS
+BEM - block element modifier - le coloca _ _ al selector seguido del hijo 
+Utilidades - 
+Modulo CSS - lo que utilizamos actualmente con selectores yla definicion de propiedades
+SMACSS - ver que elementos comparten propiedades y agruparlos, y lo diferentes definirlo en otra linea*/
+
+/*Snippet para que todos los elementos tengan definido el box-sizing
+*******   GLOBALES  ********/
+html{
+    box-sizing: border-box; /*cuando agregemos padding no modifique el tamaño del elemento*/
+    font-size: 62.5%; /* hará que 1rem sea igual a 10px  - 1rem = 10px*/
+}
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+body{
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.6rem;
+    line-height: 2;
+}
+h1, h2 , h3{
+    font-family: 'Playfair Display', serif;
+}
+h1{ 
+    font-size: 3.8rem;
+}
+@media (min-width: 768px) { 
+     h1{
+        font-size: 5rem;
+     }
+}
+h2, h3 { 
+    font-size: 2.4rem;
+}
+@media (min-width: 768px) { 
+    h2, h3 { 
+        font-size: 3rem;
+    }
+}
+
+a{
+    text-decoration: none; /*quitar la linea de abajo de links*/
+    color: #000;
+}
+img{
+    max-width: 100%; /* con esto definimos que la imagen se adaptará al 100% del tamaño del contenedor*/
+  
+    display: block; /*hacemos que ocupe todo el espacio (habia un espacio entre imagen y enlace de categorias)*/
+}
+
+/*se puede accede a un elemento(habiendo varios) dentro de algo con nth-child(num), first-child, last-child
+nav a:nth-child(){
+    font-size: 4rem;
+}*/
+
+/* BOX MODEL */
+
+/*.sobre-nosotros{
+    background-color: red;
+    width: 20rem;
+    /*margin: 100px; es la distancia externa que toma con otro elemento*/
+    /*padding: 2.5rem; toma distancia de las esquinas interiores hacia el contenido*/
+    /*box-sizing: border-box; encuadra el contenido con e width indicado sin agrandar la caja por el padding agregado
+}*/
+
+/* DISPLAY */
+/* BLOCK - que un elemento se colocara abajo del anterior sin importar tamaño o contenido
+INLINE - se colocara a la derecha una vez que este el espacio que requiere, no se puede modificar width, height
+INLINKE-BLOCK - que le permite darle width, margin, height al elemento inline (que solo inline no se puede)*/
+
+/** UTILIDADES  - crea una clase para asignarsela a un elemento, en este caso centraremos los h2*/
+
+.text-center{
+    text-align: center;
+}
+
+
+/*****    HEADER Y NAVEGACION   *******/
+.nombre-sitio{
+    text-align: center;
+    margin-top: 3rem;
+}
+
+span{
+    color: #037bc0;
+}
+
+/* FLEXBOX - es UNIDIMENSIONAL, para crear layouts, y asi alinear elementos, se pueden colocar elementos en direccion fila (row) o columna (column)
+Row es aplicado por default y sera de izquierda a derecha (MAIN AXIS)
+Column se colocaran de arriba hacia abajo (eje x)
+Solo aplica a los hijos/nodos directos del padre que es donde se define la propiedad
+
+Justify content alinea el contenido dependiendo de la orientacion que se le de, por default row,
+pues lo centrará horizontalmente.
+
+Align-items igualmente considera la orientacion que tengan los elementos para poder centrar.*/
+.nav-principal{
+    display: flex; /*con este flex podemos modificar y alinear los elementos hijos (en este caso los enlaces)*/
+    flex-direction: column;
+    padding: 1.5rem 0; /*se asignan en sentido de las agujas del reloj top, right, bottom, left*/
+    font-size: 1.5rem;
+    font-weight: 550;
+    align-items: center;
+}
+@media (min-width: 768px) { 
+    .nav-principal{
+        /*ya está como flex, entonces aqui le ponemos orientacion row,
+         ya que si no quedaria para todo tamaño como column (arriba hacia abajo)*/
+        flex-direction: row;
+        padding: 1.5rem 0;
+        justify-content: space-around;
+        font-size: 1.7rem;
+        font-weight: 100;
+    }
+}
+.contenedor-navegacion{
+    border-top: 1px solid #e1e1e1; /*para que borde llegue de punta a punta*/
+}
+.contenedor{ /* centramos el contenedor (que tiene borde arriba con margin auto*/
+    max-width: 110rem;
+    margin:0 auto; /*es NUEVO - margin-inline: auto*/
+}
+
+/*al ser un div sin propiedades hay que definirle el alto y ancho, si no, no mostrará nada*/
+.hero{
+    background-image: url('img/7.jpg');
+    height: 22rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; /*para posicionar la imagen de fondo, en este caso centrada, 
+    se puede usar tambien con ubicacion por pixeles, 1er eje X, 2do eje Y - */
+}
+@media (min-width: 768px) { 
+     .hero{
+        height: 32rem;
+     }
+}
+.categorias{
+    padding: 1rem 0 3rem;
+    margin: 0 1rem;
+}
+/* GRID LAYOUT - se dibuja una tabla donde en sus celdas se puede manejar el contenido */
+.categorias h2{
+    text-align: center;
+}
+.categoria{
+    margin-bottom: 2rem;
+}
+.categoria img{
+    width: 100%;
+}
+.categoria a{ /*accedemos al enlace dentro del div para alinearlo, como es inline hay que hacerlo block */
+    text-align: center;
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 0.5rem;
+    transition: all .2s ease-out;
+}
+.categorias div div a:hover{ 
+    background-color: #037bc0;
+    color: #FFFF;
+    border-bottom-right-radius: 3rem;
+}
+.listado-categorias div{
+    margin: 2rem 0;
+}
+@media (min-width: 768px) { 
+    .listado-categorias{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /*vamos a crear columnas en la grid*/
+        gap: 0 1.5rem ;
+    }
+    .categorias div div a{
+        font-weight: 100;
+    }
+}
+/** BLOQUE "SOBRE NOSOTROS" **/
+
+.sobre-nosotros{
+    /* el fondo azul lo cambiamos de arriba a abajo*/
+    background-image: linear-gradient(to bottom, transparent 50%, #037bc0 50%),
+    url(img/living.jpg);
+    background-size: 100%, 120rem; /* el linear al 100%, y la imagen de 120rem*/
+    background-position: left -90%; 
+    padding: 3rem;  
+}
+
+/* pasamos todo el estilo inicial al mq ya que se ajusta bien al modo escritorio*/
+@media (min-width: 768px) { 
+    .sobre-nosotros{
+        /*background-image: linear-gradient(to right, black 50%, red 100%); soporta multiples imagenes y colores*/
+        background-image: linear-gradient(to right, transparent 50%, #037bc0 50%),
+        url(img/living.jpg);
+        background-size: 100%, 120rem; /* el linear al 100%, y la imagen de 120rem*/
+        background-position: left -60%;   
+    }
+}
+
+.sobre-nosotros-grid{
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 9rem;
+}
+@media (min-width: 768px) { 
+     .sobre-nosotros-grid{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 0;
+        column-gap: 9rem;
+     }
+}
+.texto-nosotros{
+    color: #FFF;
+    grid-row: 2 / 3;
+}
+@media (min-width: 768px) { 
+    .texto-nosotros{
+        grid-column: 2 / 3;
+    }
+}
+
+/* Lo anterior se puede hacer con flex
+.sobre-nosotros-grid{
+    display: flex;
+    justify-content: flex-end;
+}
+.texto-nosotros{
+    color: #FFF;
+    flex-basis: 50%; esto seria el width del elemento
+    padding-left : 10rem; para alejarlo del medio
+}
+
+/** LISTADO DE PRODUCTOS **/
+
+.contenido-principal{
+    padding-top: 2rem ;
+}
+/* al ocupar todo el 1er row con el 1er producto, grid automaticamente traza una nueva row y coloca los otros elementos */
+.listado-productos{
+    margin: 0 1rem;
+}
+.producto{
+    background-color: #037bc0;
+    padding-bottom: 0rem;
+}
+.texto-producto{
+    text-align: center;
+    color: #FFF;
+}
+.texto-producto p{
+    margin: 1rem 2rem 0;
+}
+.texto-producto .precio{
+    font-size: 2.3rem;
+    font-weight: 900;
+    margin: 0;
+}
+.texto-producto h3{
+    margin:0
+}
+.btn{
+    background-color: #8cbc00;
+    display: block;
+    color: #FFF;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 1rem;
+    margin: 0 0 1.5rem;
+    transition: background-color .3s ease-out;
+    text-align: center;
+    border: none;
+}
+.btn:hover{
+    background-color: #769c02;
+    cursor: pointer;
+}
+@media (min-width: 768px) { 
+    .listado-productos{
+        display: grid;
+        grid-template-columns: repeat(6,1fr);
+        gap: 2rem;
+    }
+    /* segun diseño el primer prodcuto es mas grande, y al estar como grid lo definimos de la linea 1 a la 7 (tome todo)*/
+    .producto:nth-child(1){
+        grid-column: 1/ 7 ;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+    .producto:nth-child(1) img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    .producto:nth-child(2){
+        grid-column: 1 / 4;
+    }
+    .producto:nth-child(2) img,
+    .producto:nth-child(3) img{
+        height: 36rem;
+        width: 100%;
+        object-fit:cover;
+    }
+    .producto:nth-child(3){
+        grid-column: 4 / 7;
+    }
+    .producto:nth-child(4){
+        grid-column: 1 / 3;
+    }
+    .producto:nth-child(5){
+        grid-column: 3 / 5;
+    }
+    .producto:nth-child(6){
+        grid-column: 5 / 7;
+    }
+    .producto:nth-child(4) img,
+    .producto:nth-child(5) img,
+    .producto:nth-child(6) img{
+        height: 25rem;
+        width: 100%;
+        object-fit: cover;
+    }
+    .producto{
+        background-color: #037bc0;
+    }
+}
+/** FOOTER **/
+
+.site-footer{
+    border-top: 1px solid #e1e1e1;
+    margin-top: 5rem;
+    text-align: center;
+}
+.site-footer h3{
+    margin-bottom: 2rem ;
+}
+
+/* pasamos la grid del footer para que en grande se vea asi*/
+@media (min-width: 768px) { 
+    .grid-footer{
+        display: flex;
+        gap: 1rem;
+    }
+    .site-footer{
+        text-align: left;
+    }
+}
+.grid-footer div{
+    flex: 1; /*este es el factor de crecimiento que tendrá*/
+}
+
+.grid-footer a{
+    display: block;
+}
+
+.copyright{
+    text-align: center;
+    margin-top: 4rem;
+    font-weight: 700;
+}
+/* Utilizar GRID para definir layout y estructura de columnas y contendores, y FLEXbox para posicionar contenido dentro de esos contenedores (columnas-celdas)
+*/
+
+/*Unidades Absolutas y relativas
+Absolutas - mas dificil de ajustarse (px, cm, etc)
+Relativas - estas unidades toman su valor en base a otro elemento el padre (em, rem, vh, vw y % )
+Se adaptan mejor a la distintas resoluciones o tamaños de pantalla de dispositivos
+EM - se ajusta el tamaño del texto padre, multiplicando el tamaño,
+si un p(padre) tiene 3em, un p(hijo) tiene 2em, duplicará el tamaño del padre. 1em seria igual al padre.
+*/
+
+/** PAGINA NOSOTROS **/
+
+@media (min-width: 768px) { 
+    .contenido-nosotros{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax( 30rem, 1fr));
+        /*auto-fit hace que contenido se acomode automaticamente dependiendo la cantidad de hijos que tenga
+        y el minmax da un limite de anchura para la imagen, cuando sea menor a 300px=30rem tomará el valor de 1fr (se pondrá arriba del parrafo)*/
+        column-gap: 3rem;
+    }
+}
+.informacion-nosotros{
+    display: flex;
+    flex-direction: column; /* para que los oriente en sentido column y usar el justify content para alinear*/
+    justify-content: start;
+    padding: 0 2rem; /* se agrega padding en formato mobile first*/
+  
+}
+.informacion-nosotros p{
+    margin: 3rem 0 1.5rem 0;
+}
+/**   BLOG    **/
+
+@media (min-width: 768px) { 
+    .contenido-blog{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        column-gap: 3rem;
+    }
+    .contenido-blog aside{
+        grid-column: 2 / 3;
+    }
+}
+
+.contenido-blog aside{
+   padding: 0 2rem;
+}
+
+.entrada{
+    border-bottom: 1px solid #e1e1e1;
+    padding: 0 2rem 2rem;
+    margin-bottom: 2rem;
+}
+/*ubicamos el ultimo articulo y le quitamos el borde de abajo*/
+.entrada:last-of-type{
+    border:none
+}
+.entrada-meta{
+    display: flex; /* para dejarlos en la misma linea, sentido row*/
+    justify-content: space-between; /* para dejar uno en cada lado en el pie de foto*/
+    font-weight: 700;
+}
+.entrada-meta p{
+    margin: 0 0 2rem 0;
+}
+/** UTILIDAD - no dejamos que sea mas grande que 30rem**/
+
+@media (min-width: 768px) { 
+    .max-width-30{
+        max-width: 30rem;
+    }
+}
+.entrada-blog{
+    width: 70rem;
+    margin: 0 0 2rem;
+}
+/***** FIN BLOG ***/
+
+/** GALERIA  **/
+
+.galeria{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem
+}
+@media (min-width: 768px) { 
+     .galeria{
+        grid-template-columns: repeat(3, 1fr);
+     }
+}
+.galeria img{
+    
+    height: 25rem;
+    object-fit:cover;
+    min-width: 100%
+}
+
+/** FORMULARIO **/
+@media (min-width: 768px) { 
+    input[type=submit]{
+        max-width: 15rem;
+     }
+}
+input[type=submit]{
+   width: 100%;
+ }
+.formulario{
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.formulario fieldset{
+    border: 1px solid black;
+    margin-bottom: 2rem;
+}
+
+.formulario legend{
+    background-color: #004268;
+    width: 90%;
+    color: #e1e1e1;
+    font-weight: 800;
+    text-align: center;
+    border-radius: 1rem;
+    margin-bottom: 4rem;
+    padding: 1rem;
+}
+.campo{
+    display: flex;
+    margin-bottom: 2rem; /*separamos cada div con el de abajo por 20 px*/
+}
+/*por default el label usa solo espacio del largo del valor, aqui le damos un width definido para alinear los input*/
+.campo label{
+    flex-basis: 8rem;
+}
+/* selector de atributos (de un elemento) - se le podria dar una clase a los input y darle estilo pero -> 
+.campo input[type="text"],[type="tel"],[type="email"], .campo textarea, .campo select{
+    flex:1;
+    border: 1px solid #e1e1e1;
+}*/
+/* se puede hacer tambien negando un tipo, pues se le aplicaria a todos los demas input */
+.campo input:not([type="radio"]),.campo textarea, .campo select{
+    flex:1;
+    border: 1px solid #e1e1e1;
+}
+.campo .label-datalist{
+    flex-basis: 16rem;
+}
+.campo .datalist{
+    height: 4rem;
+}
+.campo input:focus, textarea:focus, select:focus{
+    outline: 1px solid #a1a1a1;
+}
